@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="glass-card p-5" style="max-width: 450px; width: 100%;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-white">PRO-SHOP</h2>
+            <p class="text-muted small">Tizimga kiring</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-4">
+                <label class="small fw-bold text-white opacity-75 mb-2 ms-1">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn-main">Tasdiqlash</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

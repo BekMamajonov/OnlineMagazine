@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="glass-card p-5 text-center" style="max-width: 450px; width: 100%;">
+        <div class="mb-4" style="background: #312e81; width: 64px; height: 64px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+        </div>
+
+        <h2 class="fw-bold mb-1 text-white">Ro'yxatdan o'tish</h2>
+        <p class="text-muted small mb-4">Ma'lumotlarni to'ldiring</p>
+
+        <form method="post" class="text-start">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="small fw-bold opacity-75 mb-2">Username</label>
+                <input type="text" name="username" class="form-control form-control-custom" placeholder="Username yarating">
+            </div>
+            <div class="mb-3">
+                <label class="small fw-bold opacity-75 mb-2">Password</label>
+                <input type="password" name="password" class="form-control form-control-custom" placeholder="••••••••">
+            </div>
+            <div class="mb-4">
+                <label class="small fw-bold opacity-75 mb-2">Confirm password</label>
+                <input type="password" name="confirm_password" class="form-control form-control-custom" placeholder="••••••••">
+            </div>
+            
+            <button type="submit" class="btn-main w-100 mb-3">Ro'yxatdan o'tish</button>
+            
+            <p class="text-center text-muted small mt-3">
+                Akkauntingiz bormi? <a href="{% url 'login' %}" class="text-primary fw-bold text-decoration-none">Kirish</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

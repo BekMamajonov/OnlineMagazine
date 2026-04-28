@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'product_list' %}" class="btn btn-sm btn-outline-light opacity-50" style="border-radius: 8px;">← Orqaga</a>
+</div>
+
+<div class="glass-card p-5">
+    <div class="row align-items-center g-5">
+        <div class="col-md-6 text-center">
+            <div class="p-4" style="background: rgba(15, 23, 42, 0.3); border-radius: 24px;">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid">
+                {% else %}
+                    <span class="text-muted">Rasm yuklanmagan</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="fw-bold text-white mb-3">{{ product.name }}</h1>
+            <div class="badge bg-success p-3 fs-5 mb-4" style="border-radius: 12px;">{{ product.price }} so'm</div>
+            <p class="lead opacity-75 mb-5">{{ product.description }}</p>
+            <button class="btn-main" data-bs-toggle="modal" data-bs-target="#buyModal">🛍️ Sotib olish</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0" style="background: #1e1b4b; border-radius: 28px;">
+            <div class="modal-body p-5 text-center" id="modalContent">
+                <div id="buyForm">
+                    <h4 class="fw-bold text-white mb-4">Ma'lumotlarni kiriting</h4>
+                    <input type="text" class="form-control-custom mb-3" placeholder="Karta raqamingiz">
+                    <input type="text" class="form-control-custom mb-3" placeholder="Manzilingiz">
+                    <input type="tel" class="form-control-custom mb-4" placeholder="Telefon raqamingiz">
+                    <button type="button" class="btn-main" onclick="finishOrder()">Tasdiqlash</button>
+                </div>
+                <div id="successMsg" class="d-none">
+                    <div class="display-1 mb-3">🚚</div>
+                    <h3 class="fw-bold text-success">Buyurtma qabul qilindi!</h3>
+                    <p class="opacity-75">Mahsulot 8-12 soat ichida manzilingizga yetkazib boriladi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function finishOrder() {
+        document.getElementById('buyForm').classList.add('d-none');
+        document.getElementById('successMsg').classList.remove('d-none');
+    }
+</script>
+{% endblock %}
