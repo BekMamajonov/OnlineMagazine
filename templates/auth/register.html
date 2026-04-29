@@ -1,41 +1,96 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-    <div class="glass-card p-5 text-center" style="max-width: 450px; width: 100%;">
-        <div class="mb-4" style="background: #312e81; width: 64px; height: 64px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 1px solid rgba(255, 255, 255, 0.1);">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="8.5" cy="7" r="4"></circle>
-                <line x1="20" y1="8" x2="20" y2="14"></line>
-                <line x1="23" y1="11" x2="17" y2="11"></line>
-            </svg>
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 50px auto;
+        padding: 40px;
+        background: #1f293a;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        color: white;
+        text-align: center;
+    }
+    .auth-logo {
+        width: 60px;
+        height: 60px;
+        background: #323c52;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 24px;
+    }
+    .form-group { margin-bottom: 20px; text-align: left; }
+    .form-group label { display: block; margin-bottom: 8px; color: #a0a0a0; }
+    .form-group input { 
+        width: 100%; 
+        padding: 12px; 
+        border-radius: 8px; 
+        border: none; 
+        background: #e8f0fe;
+        color: #333;
+        box-sizing: border-box;
+    }
+    .auth-btn {
+        width: 100%;
+        padding: 14px;
+        background: #6366f1;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .auth-link { margin-top: 20px; color: #a0a0a0; font-size: 14px; }
+    .auth-link a { color: #6366f1; text-decoration: none; font-weight: bold; }
+    
+
+    .message {
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        background: rgba(255, 0, 0, 0.1);
+        color: #ff4d4d;
+        border: 1px solid #ff4d4d;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-logo">👤</div>
+    <h2>PRO-SHOP</h2>
+    <p style="color: #a0a0a0; margin-bottom: 25px;">Ro'yxatdan o'ting</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" required>
         </div>
+        <div class="form-group">
+            <label>Parol</label>
+            <input type="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label>Parolni tasdiqlash</label>
+            <input type="password" name="password_confirm" required>
+        </div>
+        <button type="submit" class="auth-btn">RO'YXATDAN O'TISH</button>
+    </form>
 
-        <h2 class="fw-bold mb-1 text-white">Ro'yxatdan o'tish</h2>
-        <p class="text-muted small mb-4">Ma'lumotlarni to'ldiring</p>
-
-        <form method="post" class="text-start">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label class="small fw-bold opacity-75 mb-2">Username</label>
-                <input type="text" name="username" class="form-control form-control-custom" placeholder="Username yarating">
-            </div>
-            <div class="mb-3">
-                <label class="small fw-bold opacity-75 mb-2">Password</label>
-                <input type="password" name="password" class="form-control form-control-custom" placeholder="••••••••">
-            </div>
-            <div class="mb-4">
-                <label class="small fw-bold opacity-75 mb-2">Confirm password</label>
-                <input type="password" name="confirm_password" class="form-control form-control-custom" placeholder="••••••••">
-            </div>
-            
-            <button type="submit" class="btn-main w-100 mb-3">Ro'yxatdan o'tish</button>
-            
-            <p class="text-center text-muted small mt-3">
-                Akkauntingiz bormi? <a href="{% url 'login' %}" class="text-primary fw-bold text-decoration-none">Kirish</a>
-            </p>
-        </form>
+    <div class="auth-link">
+        Akkauntingiz bormi? <a href="{% url 'login' %}">Kirish</a>
     </div>
 </div>
 {% endblock %}
